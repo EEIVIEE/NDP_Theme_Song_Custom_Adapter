@@ -43,5 +43,22 @@ public class Song implements Serializable {
         this.stars = Stars;
     }
 
-    public String toString(){ return "ID: " + id + ", " + "Title: " + title + ", " + "Singer: " + singers + ", " + "Year: " + year + ", " + "Stars: " + stars; }
+    public String toString(){ return " " + getStar(stars); }
+
+
+    private String getStar(int star) {
+        switch (star) {
+            case 1: return "*";
+
+            case 2: return "* *";
+
+            case 3: return "* * *";
+
+            case 4: return "* * * *";
+
+            case 5: return "* * * * *";
+
+            default: return "";
+        }
+    }
 }

@@ -17,7 +17,8 @@ public class DisplayRecords extends AppCompatActivity {
     Button btnStar;
     ArrayList<Song> alSong;
     ListView lvSong;
-    ArrayAdapter aaSong;
+    //ArrayAdapter aaSong;
+    CustomAdapter caSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,15 @@ public class DisplayRecords extends AppCompatActivity {
         btnStar = findViewById(R.id.btnStar);
         lvSong = findViewById(R.id.lvSong);
         alSong = new ArrayList<Song>();
-        aaSong = new ArrayAdapter<Song>(this,
-                android.R.layout.simple_list_item_1, alSong);
-        lvSong.setAdapter(aaSong);
+        //aaSong = new ArrayAdapter<Song>(this,
+                //android.R.layout.simple_list_item_1, alSong);
+        caSong = new CustomAdapter(this, R.layout.row, alSong);
+        lvSong.setAdapter(caSong);
 
         DBHelper dbh = new DBHelper(DisplayRecords.this);
         alSong.clear();
         alSong.addAll(dbh.getAllSongs());
-        aaSong.notifyDataSetChanged();
+        caSong.notifyDataSetChanged();
 
         btnStar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +47,7 @@ public class DisplayRecords extends AppCompatActivity {
                 int filterText = 5;
                 alSong.addAll(dbh.getStarSongs(filterText));
 
-                aaSong.notifyDataSetChanged();
+                caSong.notifyDataSetChanged();
             }
         });
 
@@ -67,6 +69,6 @@ public class DisplayRecords extends AppCompatActivity {
         DBHelper dbh = new DBHelper(DisplayRecords.this);
         alSong.clear();
         alSong.addAll(dbh.getAllSongs());
-        aaSong.notifyDataSetChanged();
+        caSong.notifyDataSetChanged();
     }
 }
